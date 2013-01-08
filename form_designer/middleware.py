@@ -1,3 +1,4 @@
+import sys
 from form_designer.exceptions import HttpRedirectException
 from django.template.base import TemplateSyntaxError
 from django.http import HttpResponseRedirect
@@ -8,7 +9,7 @@ class RedirectMiddleware(object):
         #is raised in a node
         if isinstance(exception, TemplateSyntaxError):
             try:
-                exception = exception.exc_info[1]
+                exception = sys.exc_info()[1]
             except IndexError, e:
                 return
 
