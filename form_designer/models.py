@@ -163,6 +163,13 @@ class FormDefinition(models.Model):
 
         message.send(fail_silently=False)
 
+    def post_submit(self, form, request):
+        """
+            Hook for form subclasses to define, in order to perform
+            additional actions after a form is successfully submitted.
+        """
+        pass
+
     @property
     def submit_flag_name(self):
         name = settings.SUBMIT_FLAG_NAME % self.name

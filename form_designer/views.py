@@ -44,6 +44,8 @@ def process_form(request, form_definition, extra_context={}, disable_redirection
                 form_definition.log(form, request.user)
             if form_definition.mail_to:
                 form_definition.send_mail(form, files)
+            if hasattr(form_definition, 'post_submit'):
+                form_definition.post_submit(form=form, request=request)
 
             if form_definition.success_redirect and not disable_redirection:
                 if form_definition.redirection_url:
