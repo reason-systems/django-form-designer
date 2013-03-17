@@ -13,7 +13,7 @@ class FormDesignerPlugin(CMSPluginBase):
     module = _('Form Designer')
     name = _('Form')
     admin_preview = False
-
+    text_enabled=True
     def render(self, context, instance, placeholder):
         if instance.form_definition.form_template_name:
             self.render_template = instance.form_definition.form_template_name
@@ -23,5 +23,7 @@ class FormDesignerPlugin(CMSPluginBase):
         # Redirection does not work with CMS plugin, hence disable:
         return process_form(context['request'], instance.form_definition, context, disable_redirection=True)
 
+    def icon_src(self, instance):
+        return "/static/plugin_icons/form.png"
 
 plugin_pool.register_plugin(FormDesignerPlugin)
