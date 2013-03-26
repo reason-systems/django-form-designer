@@ -46,36 +46,39 @@ jQuery(function($) {
         });
     }
 
-    var addRow = target.find('.add-row');
-    addRow.remove();
-    var ordered = [];
-    var unordered = [];
-    // Initially, remove and re-append all inlines ordered by their "position" value
-    target.find(item).each(function(i) {
-        var initialPos = $(this).find(positionInput).val();
-        if (initialPos) {
-            while (initialPos < ordered.length && ordered[initialPos]) {
-                initialPos++;
+    target.each(function() {
+        var group = $(this);
+        var addRow = group.find('.add-row');
+        addRow.remove();
+        var ordered = [];
+        var unordered = [];
+        // Initially, remove and re-append all inlines ordered by their "position" value
+        group.find(item).each(function(i) {
+            var initialPos = $(this).find(positionInput).val();
+            if (initialPos) {
+                while (initialPos < ordered.length && ordered[initialPos]) {
+                    initialPos++;
+                }
+                ordered[initialPos] = this;
+            } else {
+                unordered[unordered.length] = this;
             }
-            ordered[initialPos] = this;
-        } else {
-            unordered[unordered.length] = this;
+            this.parentElement.removeChild(this);
+        });
+        for (var i = 0; i < ordered.length; i++) {
+            var el = ordered[i];
+            if (el) {
+                group.append(el);
+            }   
         }
-        this.parentElement.removeChild(this);
+        // Add "position"-less elements in the end
+        for (var i = 0; i < unordered.length; i++) {
+            var el = unordered[i];
+            group.append(el);
+        }
+        group.append(addRow);
     });
-    for (var i = 0; i < ordered.length; i++) {
-        var el = ordered[i];
-        if (el) {
-            target.append(el);
-        }   
-    }
-    // Add "position"-less elements in the end
-    for (var i = 0; i < unordered.length; i++) {
-        var el = unordered[i];
-        target.append(el);
-    }
-    target.append(addRow);
-
+    
     target.sortable({
         containment: 'parent',
         /*zindex: 10, */

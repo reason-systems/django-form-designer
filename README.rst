@@ -24,7 +24,7 @@ This install guide assumes that you are familiar with Python and Django.
 
 - Install the module using pip::
 
-    $ pip install git://github.com/philomat/django-form-designer.git#egg=django-form-designer
+    $ pip install git+git://github.com/philomat/django-form-designer.git#egg=django-form-designer
 
   **or** download it from http://github.com/philomat/django-form-designer, and run the installation 
   script::
@@ -87,6 +87,13 @@ Using Django Form Designer with Django CMS
         INSTALLED_APPS = (
             ...
             'form_designer.contrib.cms_plugins.form_designer_form',
+        )
+
+- Optionally add ``form_designer.middleware.RedirectMiddleware to MIDDLEWARE_CLASSES to handle redirects::
+
+        MIDDLEWARE_CLASSES = (
+            ...
+            'form_designer.middleware.RedirectMiddleware',
         )
 
 - Set up the database tables using::
