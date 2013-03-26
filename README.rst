@@ -66,9 +66,9 @@ Basic setup
 
 - Add the URLs to your URL conf. For instance, in order to make a form named
   ``example-form``   available under ``http://domain.com/forms/example-form``,
-  add the following line to your    project's ``urls.py``::
+  add the following lines to your    project's ``urls.py``::
 
-    urlpatterns = patterns('',
+    urlpatterns += patterns('',
         (r'^forms/', include('form_designer.urls')),
         ...
     )
