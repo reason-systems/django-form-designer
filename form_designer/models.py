@@ -251,8 +251,8 @@ class FormDefinitionField(models.Model):
 
         if self.field_class == 'django.forms.DecimalField':
             args.update({
-                'max_value': Decimal(str(self.max_value)),
-                'min_value': Decimal(str(self.min_value)),
+                'max_value': Decimal(str(self.max_value)) if self.max_value is not None else None,
+                'min_value': Decimal(str(self.min_value)) if self.min_value is not None else None,
                 'max_digits': self.max_digits,
                 'decimal_places': self.decimal_places,
             })
