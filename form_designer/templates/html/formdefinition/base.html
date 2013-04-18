@@ -40,6 +40,16 @@
 </head>
 <body>
     <!-- example base template, replace with your own -->
+
+    <!-- don't forget your base template will need to display messages -->
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    
     {% block content %}
     {% endblock %}
 </body>
