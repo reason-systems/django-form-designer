@@ -11,7 +11,7 @@
     {% for field in form %}
         {% if not field.is_hidden %}
             {{ field.errors }}
-            <p class="field {% if field.errors %}errors{% endif %}{% if field.field.required %}{% if field.errors %} {% endif %}required{% endif %}">
+            <p class="field {{ field.errors|yesno:"errors," }} {{ field.field.required|yesno:"required," }}">
                 <label for="{{ field.auto_id }}">{{ field.label }}</label>
                 {{ field }}
             </p>

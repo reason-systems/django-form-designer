@@ -4,7 +4,7 @@
         <thead>
             {% for field in form %}
                 {% if not field.is_hidden %}
-                    <th class="{% if field.errors %}errors{% endif %}{% if field.field.required %}{% if field.errors %} {% endif %}required{% endif %}">
+                    <th class="{{ field.errors|yesno:"errors," }} {{ field.field.required|yesno:"required," }}">
                         <label for="{{ field.auto_id }}">{{ field.label }}</label>
                     </th>
                 {% endif %}
@@ -21,7 +21,7 @@
             <tr>
             {% for field in form %}
                 {% if not field.is_hidden %}
-                    <td class="field {% if field.errors %}errors{% endif %}{% if field.field.required %}{% if field.errors %} {% endif %}required{% endif %}">
+                    <td class="field {{ field.errors|yesno:"errors," }} {{ field.field.required|yesno:"required," }}">
                         {{ field.errors }}
                         {{ field }}
                     </td>
