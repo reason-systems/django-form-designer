@@ -84,7 +84,7 @@ def _form_detail_view(request, form_definition):
     if isinstance(result, HttpResponseRedirect):
         return result
     result.update({
-        'form_template': form_definition.form_template_name or app_settings.DEFAULT_FORM_TEMPLATE
+        'form_template_name': form_definition.form_template_name or app_settings.DEFAULT_FORM_TEMPLATE
     })
     return render_to_response('html/formdefinition/detail.html', result,
         context_instance=RequestContext(request))
